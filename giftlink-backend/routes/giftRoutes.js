@@ -1,10 +1,19 @@
 const express = require('express');
 const router = express.Router();
 const logger = require('../logger');
-const connectToDatabase = require('../models/db'); // Imported but not called
+const connect = require('../models/db'); // Imported but not called
 
 // Get all gifts
+ try {
+        const db = await connectToDatabase();
 
+        const collection = db.collection("gifts");
+        const gifts = await collection.find({}).toArray();
+        res.json(gifts);
+    } catch (e) {
+        logger.console.error('oops something went wrong', e);
+        next(e);
+    }
 
 // Get a single gift by ID
 
