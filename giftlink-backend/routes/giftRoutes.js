@@ -7,19 +7,7 @@ const connectToDatabase = require('../models/db'); // Imported but not called
 
 
 // Get a single gift by ID
-router.get('/:id', async (req, res, next) 
 
-    
-
-        if (!gift) {
-            return res.status(404).send("Gift not found");
-        }
-
-        res.json(gift);
-    } catch (e) {
-        next(e);
-    }
-});
 
 
 // Add a new gift
