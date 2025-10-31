@@ -12,8 +12,18 @@ router.get('/', async (req, res, next) => {
 // Get a single gift by ID
 
 
-
 // Add a new gift
+router.post('/', async (req, res, next) => {
+    try {
+        const db = await connectToDatabase();
+        const collection = db.collection("gifts");
+        const gift = await collection.insertOne(req.body);
+
+        res.status(201).json(gift.ops[0]);
+    } catch (e) {
+        next(e);
+    }
+});
 
 
 module.exports = router;
